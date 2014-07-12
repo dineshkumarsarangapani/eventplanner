@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+.jumbotron {
+	padding-top: 16px;
+	padding-bottom: 16px;
+	background-color: #4679bd;
+	color:white;
+}
+
+.logo {
+	margin-bottom: 10px;
+}
+
+.user-from {
+	margin-top: 34px;
+}
