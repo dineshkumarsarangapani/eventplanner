@@ -15,13 +15,6 @@ Event Planner
 <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="bootstrap-slider-master/js/bootstrap-slider.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <script>
-  $(function() {
-    $( "#accordion" ).accordion();
-    $( document ).tooltip();
-  });
-
-  </script>
 
 </head>
 <body>
@@ -35,7 +28,7 @@ Event Planner
     </div>
     <div class="jumbotron">
       <div class="container">
-       <form onsubmit="return false;" class="form-inline form-adj" role="form">
+       <form onsubmit="return false;" name="ajaxform" id="ajaxform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
        <label for="location">Location</label>
        <select id="location" class="form-control">
        <option value="">-Location-</option>
@@ -152,7 +145,34 @@ Event Planner
  
     </div>
 <script type="text/javascript">
-$('.date').datepicker()
+$('.date').datepicker();
+$(function() {
+    $( "#accordion" ).accordion();
+    $( document ).tooltip();
+  });
+
+  $("#ajaxform").submit(function(e)
+{
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    $.ajax(
+    {
+        url : formURL,
+        type: "POST",
+        data : postData,
+        success:function(data, textStatus, jqXHR) 
+        {
+            //data: return data from server
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+            //if fails      
+        }
+    });
+    e.preventDefault(); //STOP default action
+    e.unbind(); //unbind. to stop multiple form submit.
+});
+
 </script>
 </body>
 
