@@ -1,0 +1,36 @@
+// function to modify the balance cash value
+
+$("[type=checkbox]").click(function(){
+  var thischeck = $(this);
+  var rate,total;
+  if (thischeck.is (':checked')){
+  rate = $(this).attr("rate");
+  total = $("#total").text();
+  $("#total").text(total-rate);
+}else{
+  rate = parseInt($(this).attr("rate"));
+  total = parseInt($("#total").text());
+  $("#total").text(total+rate);
+}
+});
+
+// add this inside button click to show the accordion
+
+$("#total").text($("#budget").val());	
+
+
+// mark-up for balance cash. add before the container div.
+
+<div class="sideBox">
+  <h3>Cash Balance</h3>
+  <p><label id="total"></label></p>
+</div>
+
+// include these styles
+
+.sideBox {
+  border: 1px solid;
+  float: right;
+  text-align: center;
+  width: 200px;
+}
