@@ -42,10 +42,6 @@ a.example-lnk {
     margin-top: 10px;
 }
 
- label {
-display: inline-block;
-width: 5em;
-}
 a{
 	text-decoration: none;
 }
