@@ -9,7 +9,7 @@ Event Planner
 <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
 <link href="bootstrap-slider-master/css/bootstrap-slider.css" rel="stylesheet">
     <link href="css_custom/eventplan.css" rel="stylesheet">
-
+<script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
@@ -46,6 +46,10 @@ Event Planner
 	    <label for="budget">Budget</label>
 	    <input name="budget" type="text" class="form-control" id="budget" placeholder="in INR">
 	  </div>
+	  <div class="form-group">
+	    <label for="noguest">Guest</label>
+	    <input name="noguest" type="text" class="form-control" id="noguest" placeholder="500">
+	  </div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
      
@@ -55,23 +59,77 @@ Event Planner
     
     <div class="container">
     <h1 id="plan"> Give your Budget. We will recommend a plan for you.</h1> 
-<div style="display:none;" id="accordion">
-  <h3>Party Hall</h3>
+<div  id="accordion">
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Party Hall</h3></legend>
   <div>
     <p id="Marriagehall">
-   
+   		<form onsubmit="return false;" name="Marriagehall" id="Marriagehallform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="noseats">No of seats</label>
+       <input name="noseats" type="text" class="form-control form-input date" id="noseats">
+	  <div class="form-group">
+	      <label for="norooms">No of rooms</label>
+	    <input name="norooms" type="text" class="form-control form-input date" id="norooms">
+	    </div>
+	  <div class="form-group">
+	    <label for="Parking">Parking</label>
+	    <input type="checkbox" id="Parking">
+	  </div>
+	  <div class="form-group">
+	    <label for="ac">A/c</label>
+	    <input name="ac" type="checkbox" id="ac">
+	    <label for="NonAc">NonA/c</label>
+	    <input name="NonAc" type="checkbox" id="NonAc">
+	  </div>
+	</form>
+	<div id="Marriagehall-content"></div>
     </p>
   </div>
-  <h3>Food Caterors</h3>
+  </fieldset>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Food Caterors</h3></legend>
   <div>
     <p id="Food">
+    <form onsubmit="return false;" name="food" id="Foodform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="Veg">Veg</label>
+       <input type="checkbox" id="Veg">
+	  <div class="form-group">
+	      <label for="nonveg">Non-Veg</label>
+	    <input type="checkbox" id="nonveg">
+	    </div>
+	  <div class="form-group">
+	    <label for="No-of-Items">No of Items</label>
+	    <input name="No-of-Items" type="text" class="form-control form-input date" id="No-of-Items">
+	  </div>
+	  <div class="form-group">
+	    <label for="Buffet">Buffet</label>
+	    <input type="checkbox" id="Buffet">
+	  </div>
+	</form>
+	<div id="Food-content"></div>
     </p>
   </div>
-  <h3>Photographers</h3>
+  </fieldset>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Photographers</h3></legend>
   <div>
     <p id="Photographer">
+     <form onsubmit="return false;" name="Photographer" id="Photographerform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="Device">Device</label>
+       <input name="NonAc" type="checkbox" id="NonAc">
+	  <div class="form-group">
+	      <label for="Video">Video</label>
+	   <input name="NonAc" type="checkbox" id="NonAc">
+	    </div>
+	    <div class="form-group">
+	      <label for="HD-Video">HD-Video</label>
+	    <input name="NonAc" type="checkbox" id="NonAc">
+	    </div>
+	</form>
+	<div id="Photographer-content"></div>
    </p>
   </div>
+  </fieldset>
 </div>
  
     </div>
@@ -79,7 +137,7 @@ Event Planner
 
 $(function() {
 	$('.date').datepicker();
-    $( "#accordion" ).accordion();
+    //$( "#accordion" ).accordion();
     $( document ).tooltip();
   });
 
@@ -94,13 +152,56 @@ $(function() {
 	        values[this.name] = $(this).val();
 	    });
 	    
-	    processaccordion()
+	    processaccordion(values)
      console.log(values)
      
    });
   
-  function processaccordion() {
-	  
+  function processaccordion(values) {
+	  var budget = values['budget']
+	  var result = {'Marriagehall': [], 'Food': [], 'Photographer': []}
+	  $.each(Datadump, function(index, val){
+		 $.each(val, function(ind, dataval){
+			if( dataval.rate <= budget) {
+				result[index].push(dataval) 
+			}	 
+		 });
+	  });
+	  buildaccord(result)
+  }
+  
+  function buildaccord(result) {
+   $.each(result, function(index, data){
+	   var template;
+	   console.log($('#' + index +'form'))
+	   $('#' + index +'-content').empty()
+	   $.each(data, function(ind, dd){
+		   console.log(data)
+		   template = '<a class="example-lnk" href="#" title="{{name}}"> ' + 
+    '<span class="	 thumbnail"> ' + 
+    '<img width="284" height="186" alt="" src="{{imgpath}}" title=""> ' + 
+ ' </span> ' + 
+ ' <span class="example-title-lnk"> ' + 
+   ' <span class="example-label"> ' + 
+   'Rs. {{rate}} ' + 
+  '  </span> ' + 
+   ' <br> ' + 
+   ' <input type="checkbox" name={{id}} id="{{id}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
+  '</span> ' + 
+'</a>'
+
+			template = template.replace('{{name}}', dd.name)
+			template = template.replace('{{imgpath}}', dd.imgpath)
+			template = template.replace('{{rate}}', dd.rate)
+			template = template.replace('{{id}}', dd.id)
+			template = template.replace('{{id}}', dd.id)
+		   $('#' + index +'-content').append(template)
+	   });
+	   
+	   
+   });
+
+//value.replace(".", ":"); // value = 9:61
   }
 
 </script>
