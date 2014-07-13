@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>
+Event Planner
+</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="datepicker/css/datepicker.css">
+<link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+<link href="bootstrap-slider-master/css/bootstrap-slider.css" rel="stylesheet">
+    <link href="css_custom/eventplan.css" rel="stylesheet">
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript" src="bootstrap-slider-master/js/bootstrap-slider.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<div class="container">
+<img class="logo" alt="Event Planner" width ="180px"; src="images/Beatle leaves.png">
+<span class="pull-right"><a href="builder.html">Contact us</a> | <a href="builder.html">Pricing</a> | 
+<a href="builder.html">FAQ</a> | <a  href="builder.html">Careers</a> | <a  href="builder.html">Vendors</a></span>
+<div class=" ">
+         
+        </div><!--/.navbar-collapse -->
+    </div>
+    <div class="jumbotron">
+      <div class="container">
+       <form onsubmit="return false;" name="ajaxform" id="ajaxform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="location">Location</label>
+       <select name="location" id="location" class="form-input form-control">
+       <option value="">-Location-</option>
+       <option value="Chennai">Chennai</option>
+       <option value="Mumbai">Mumbai</option>
+       <option value="Kolkata">Kolkata</option>
+       </select>
+	  <div class="form-group">
+	      <label for="fromdate">From</label>
+	    <input name="from" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="fromdate">
+	    <label for="fromdate">To</label>
+	    <input name="to" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="todate">
+	    </div>
+	  <div class="form-group">
+	    <label for="budget">Budget</label>
+	    <input name="budget" type="text" autocomplete="off" class="form-control" id="budget" placeholder="in INR">
+	  </div>
+	  <div class="form-group">
+	    <label for="noguest">Guest</label>
+	    <input name="noguest" type="text" class="form-control" id="noguest" placeholder="500">
+	  </div>
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+     
+      
+    </div>
+    </div>
+    
+    <div class="container">
+    <h1 id="plan"> <span style="color:#00ff00;">Dear Rajee</span>, Congratulations ...</h1> 
+    <br/>
+    <p style="border-top:1px solid;">
+    <div class="row" id="r1">
+      <div class="col-md-1"><h3><label id="remove"><img width="50" height="50" id="img1" title="Click here to remove this option" src="images/cross.png" alt=""></label></h3></div>
+      <div class="col-md-4"><h3>AVM Rajeshwari marriage hall</h3></div>
+      <div class="col-md-4"><a title="" href="javascript:void(0);" class="example-lnk" id="ui-id-2"> <span class="   thumbnail"> <img width="284" height="186" title="" src="images/Marriagehall/Vendor3.png" alt="">  </span>   </a></div>
+      <div class="col-md-3"><h3><label id="amount1">3,00,000</label></h3></div>
+    </div>
+    </p>
+    <br/>
+    <P>
+    <div class="row">
+      <div class="col-md-1"><h3><label id="remove"><img width="50" height="50" title="Click here to remove this option" src="images/cross.png" alt=""></label></h3></div>
+      <div class="col-md-4"><h3>Rathna Cafe</h3></div>
+      <div class="col-md-4"><a title="" href="javascript:void(0);" class="example-lnk" id="ui-id-2"> <span class="   thumbnail"> <img width="284" height="186" title="" src="images/Food/Food5.png" alt="">  </span>   </a></div>
+      <div class="col-md-3"><h3><label id="amount2">2,00,000</label></h3></div>
+    </div>
+    </p>
+    <br/>
+    <P>
+    <div class="row">
+      <div class="col-md-1"><h3><label id="remove"><img width="50" height="50" title="Click here to remove this option" src="images/cross.png" alt=""></label></h3></div>
+      <div class="col-md-4"><h3>Abi Siva Creations</h3></div>
+      <div class="col-md-4"><a title="" href="javascript:void(0);" class="example-lnk" id="ui-id-2"> <span class="   thumbnail"> <img width="284" height="186" title="" src="images/Photographer/Photographer5.png" alt="">  </span>   </a></div>
+      <div class="col-md-3"><h3><label id="amount3">1,00,000</label></h3></div>
+    </div>
+    </p>
+    <br/>
+    <p>
+    <div class="row" style="border-top:1px solid">
+      <div class="col-md-1"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><h3>Total Amount</h3></div>
+      <div class="col-md-3"><h3><label id="totalAmount">6,00,000</label></h3></div>
+    </div>
+    </p>
+    <br/>
+    <p>
+    <div class="row" style="border-top:1px solid">
+      <div class="col-md-1"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><a href="#"><img width="200" style="float:right;margin-top:20px" title="payment options" src="images/paypal.png" alt=""></a></div>
+      <div class="col-md-3"><h3><label id="totalAmount"></label><a href=""><img width="200px" height="50px" title="payment options" src="images/cclogo.jpg" alt=""> </a></h3></div>
+    </div>
+    <br/>
+    <p>
+      <div class="row">
+      <div class="col-md-12" style="text-align:center">Copyright © 2014 - 2015 Betel. All rights reserved. <a href="#">Privacy Policy</a> <a href="#">Legal Agreements</a> </div>
+    </div>
+    </p>
+  </p>
+    </div>
+
+<script type="text/javascript">
+$("#img1").click(function(){
+  $("#r1").hide();
+  alert("Are you sure to remove this option ?");
+  $("#totalAmount").text("3,00,000");
+})
+</script>
+</body>
+
+</html>
