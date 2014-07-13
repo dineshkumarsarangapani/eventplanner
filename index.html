@@ -60,7 +60,7 @@ Event Planner
     <div class="col-md-2">
     <div class="sideBox">
       <h4>Cash Balance</h4>
-      <p><label id="total">Rs. 0</label></p>
+      <p><label id="total1">Rs. <span id="total">0</span></label></p>
       <h4>Items Selected</h4>
       <p><label id="items">0</label></p>
       <button class="btn btn-primary" id="checkout" type="button">Checkout</button>
@@ -163,7 +163,7 @@ $(document).on("click",'.price',function() {
 	}else{
 	  rate = parseInt($(this).attr("rate"));
 	  total = parseInt($("#total").text());
-	  $("#total").text("Rs. "+total+rate);
+	  $("#total").text(+total+rate);
 	}
  });
 
@@ -188,6 +188,10 @@ $(document).on("click",'.price',function() {
   
   function processaccordion(values) {
 	  var budget = values['budget']
+	  if(budget == '') {
+		  buildaccord(Datadump)
+		  return
+	  }
 	  var result = {'Marriagehall': [], 'Food': [], 'Photographer': []}
     $("#total").text($("#budget").val());
 	  $.each(Datadump, function(index, val){
@@ -199,6 +203,23 @@ $(document).on("click",'.price',function() {
 	  });
 	  buildaccord(result)
   }
+  
+  function generatestar(rating) {
+	  var returnt = 
+	  ' <span class="rating">'
+	  for(var i = 1 ; i<= rating; i++) {
+		  returnt +=  '<span class="glyphicon size red glyphicon-star"></span>'
+	  }
+	  for(var i = 1 ; i<= (5-rating); i++) {
+		  returnt +=  '<span class="glyphicon size glyphicon-star"></span>'
+	  }
+	  returnt +=  '</span>' ;
+	  return returnt;
+  }
+  
+  function replaceAll(find, replace, str) {
+	  return str.replace(new RegExp(find, 'g'), replace);
+	}
   
   function buildaccord(result) {
    $.each(result, function(index, data){
@@ -215,17 +236,17 @@ $(document).on("click",'.price',function() {
    ' <span class="example-label"> ' + 
    'Rs. {{rate}} ' + 
   '  </span> ' + 
-   ' <br> ' + 
-   ' <input type="checkbox" class="price" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
+   ' <br> ' +
+   ' <label for="{{name}}" ' + 
+   ' <input type="checkbox" name="{{name}}}" class="price" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp;' + 
+ 	generatestar(dd.rating)
   '</span> ' + 
 '</span>'
 
-			template = template.replace('{{name}}', dd.name)
-			template = template.replace('{{imgpath}}', dd.imgpath)
-			template = template.replace('{{rate}}', dd.rate)
-     		 template = template.replace('{{rate}}', dd.rate)
-			template = template.replace('{{id}}', dd.id)
-			template = template.replace('{{id}}', dd.id)
+			template = replaceAll("{{name}}", dd.name, template)
+			template = replaceAll("{{imgpath}}", dd.imgpath, template)
+     		 template = replaceAll("{{rate}}", dd.rate, template)
+			template = replaceAll("{{id}}", dd.id, template)
 		   $('#' + index +'-content').append(template)
 	   });
 	   
