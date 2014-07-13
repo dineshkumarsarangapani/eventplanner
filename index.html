@@ -149,7 +149,7 @@ Event Planner
 $(function() {
 	$('.date').datepicker();
     //$( "#accordion" ).accordion();
-    $( document ).tooltip();
+   // $( document ).tooltip();
     // function to modify the balance cash value
 
 $(document).on("click",'.price',function() {
@@ -240,18 +240,60 @@ $(document).on("click",'.price',function() {
   '</div>'+
 '</div>';
 	modaltemplate = replaceAll("{{id}}", dd.id, modaltemplate)
-	
+	var marriagetemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Number of Rooms : ' + '12' + '</li>'+
+				'<li>Parking : ' + 'Yes' + '</li>'+
+				'<li>A/C Rooms : ' + 'Yes '+ '</li>'+
+				'<li>No of seats : ' + '5000'+ '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
+			var Foodtemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Number of items : ' + '12' + '</li>'+
+				'<li>Vegetarian : ' + 'Yes' + '</li>'+
+				'<li>Non-Vegetarian: ' + 'Yes '+ '</li>'+
+				'<li>Buffet : ' + 'Yes'+ '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
+			var Photographertemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Device : ' + '12' + '</li>'+
+				'<li>Video : ' + 'Yes' + '</li>'+
+				'<li>HD Video : ' + 'Yes '+ '</li>'+
+				'<li>Live relay : ' + 'No'+ '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
 	switch(type) {
 	case 'Marriagehall':
+		modaltemplate = replaceAll("{{modalbody}}", marriagetemp, modaltemplate)
 		break;
 	case 'Food':
+		modaltemplate = replaceAll("{{modalbody}}",Foodtemp, modaltemplate)
 		break;
 	case 'Photographer':
+		modaltemplate = replaceAll("{{modalbody}}", Photographertemp, modaltemplate)
 		break;
 	}
 	
 	return modaltemplate;
   }
+  
   
   function buildaccord(result) {
    $.each(result, function(index, data){
