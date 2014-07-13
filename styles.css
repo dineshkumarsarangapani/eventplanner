@@ -73,3 +73,11 @@ legend.scheduler-border {
 	padding: 0 10px;
 	border-bottom: none;
 }
+
+.sideBox {
+  border: 1px solid;
+  float: right;
+  text-align: center;
+  width: 200px;
+  position: fixed;
+}

@@ -56,7 +56,10 @@ Event Planner
       
     </div>
     </div>
-    
+    <div class="sideBox">
+      <h3>Cash Balance</h3>
+      <p><label id="total"></label></p>
+    </div>
     <div class="container">
     <h1 id="plan"> Give your Budget. We will recommend a plan for you.</h1> 
 <div  id="accordion">
@@ -139,6 +142,9 @@ $(function() {
 	$('.date').datepicker();
     //$( "#accordion" ).accordion();
     $( document ).tooltip();
+    // function to modify the balance cash value
+
+$("[type=checkbox]").on("click",changeBalance);
   });
 
   $("#ajaxform").submit(function(e) {
@@ -156,10 +162,29 @@ $(function() {
      console.log(values)
      
    });
+
+ 
+
+function changeBalance(){
+  alert("inside");
+  var thischeck = $(this);
+  var rate,total;
+  if (thischeck.is (':checked')){
+  rate = $(this).attr("rate");
+  total = $("#total").text();
+  $("#total").text(total-rate);
+}else{
+  rate = parseInt($(this).attr("rate"));
+  total = parseInt($("#total").text());
+  $("#total").text(total+rate);
+}
+}
+
   
   function processaccordion(values) {
 	  var budget = values['budget']
 	  var result = {'Marriagehall': [], 'Food': [], 'Photographer': []}
+    $("#total").text($("#budget").val());
 	  $.each(Datadump, function(index, val){
 		 $.each(val, function(ind, dataval){
 			if( dataval.rate <= budget) {
@@ -186,13 +211,14 @@ $(function() {
    'Rs. {{rate}} ' + 
   '  </span> ' + 
    ' <br> ' + 
-   ' <input type="checkbox" name={{id}} id="{{id}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
+   ' <input type="checkbox" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
   '</span> ' + 
 '</a>'
 
 			template = template.replace('{{name}}', dd.name)
 			template = template.replace('{{imgpath}}', dd.imgpath)
 			template = template.replace('{{rate}}', dd.rate)
+      template = template.replace('{{rate}}', dd.rate)
 			template = template.replace('{{id}}', dd.id)
 			template = template.replace('{{id}}', dd.id)
 		   $('#' + index +'-content').append(template)
@@ -204,6 +230,7 @@ $(function() {
 //value.replace(".", ":"); // value = 9:61
   }
 
+ 
 </script>
 </body>
 
