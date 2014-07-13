@@ -155,3 +155,7 @@ legend.scheduler-border {
 .txt-lft {
 	text-align: left;
 }
+
+img{
+	cursor:pointer;
+}

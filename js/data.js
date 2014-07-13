@@ -22,15 +22,15 @@ var Datadump = {
 		        {'id':18,'rate' : 150, 'rating':5, 'imgpath': 'images/Food/food6.png', 'minBudget' : 1, 'name' :'Fast foods', 'type' : 'Veg', 'items' : 8, 'buffet': 'No'}
 		        ],
 		'Photographer' :[
-				{'id':19,'rate' : 50000, 'rating':5, 'imgpath': 'images/Photographer/Photographer1.png', 'minBudget' : 1, 'name' :'Super Clicks','HD Video': 'No'},
-				{'id':20,'rate' : 75000, 'rating':3, 'imgpath': 'images/Photographer/Photographer2.png', 'minBudget' : 1, 'name' :'Raja photos','HD Video': 'Yes'},
-				{'id':21,'rate' : 20000, 'rating':4, 'imgpath': 'images/Photographer/Photographer3.png', 'minBudget' : 1, 'name' :'lights on','HD Video': 'Yes'},
-				{'id':22,'rate' : 100000, 'rating':5, 'imgpath': 'images/Photographer/Photographer4.png', 'minBudget' : 1, 'name' :'ABC photo','HD Video': 'Yes'},
-				{'id':23,'rate' : 5000, 'rating':3, 'imgpath': 'images/Photographer/Photographer5.png', 'minBudget' : 1, 'name' :'Lense craft','HD Video': 'No'},
-				{'id':24,'rate' : 4000, 'rating':4, 'imgpath': 'images/Photographer/Photographer6.png', 'minBudget' : 1, 'name' :'Memories ','HD Video': 'No'},
-				{'id':25,'rate' : 40000, 'rating':3, 'imgpath': 'images/Photographer/Photographer7.png', 'minBudget' : 1, 'name' :'You memories','HD Video': 'No'},
-				{'id':26,'rate' : 85000, 'rating':5, 'imgpath': 'images/Photographer/Photographer8.png', 'minBudget' : 1, 'name' :'Ages photos','HD Video': 'Yes'},
-				{'id':27,'rate' : 90000, 'rating':3, 'imgpath': 'images/Photographer/Photographer9.png', 'minBudget' : 1, 'name' :'Bees photos','HD Video': 'Yes'}
+				{'id':19,'rate' : 50000, 'rating':5, 'imgpath': 'images/Photographer/Photographer1.png', 'minBudget' : 1, 'name' :'Super Clicks','HDVideo': 'No'},
+				{'id':20,'rate' : 75000, 'rating':3, 'imgpath': 'images/Photographer/Photographer2.png', 'minBudget' : 1, 'name' :'Raja photos','HDVideo': 'Yes'},
+				{'id':21,'rate' : 20000, 'rating':4, 'imgpath': 'images/Photographer/Photographer3.png', 'minBudget' : 1, 'name' :'lights on','HDVideo': 'Yes'},
+				{'id':22,'rate' : 100000, 'rating':5, 'imgpath': 'images/Photographer/Photographer4.png', 'minBudget' : 1, 'name' :'ABC photo','HDVideo': 'Yes'},
+				{'id':23,'rate' : 5000, 'rating':3, 'imgpath': 'images/Photographer/Photographer5.png', 'minBudget' : 1, 'name' :'Lense craft','HDVideo': 'No'},
+				{'id':24,'rate' : 4000, 'rating':4, 'imgpath': 'images/Photographer/Photographer6.png', 'minBudget' : 1, 'name' :'Memories ','HDVideo': 'No'},
+				{'id':25,'rate' : 40000, 'rating':3, 'imgpath': 'images/Photographer/Photographer7.png', 'minBudget' : 1, 'name' :'You memories','HDVideo': 'No'},
+				{'id':26,'rate' : 85000, 'rating':5, 'imgpath': 'images/Photographer/Photographer8.png', 'minBudget' : 1, 'name' :'Ages photos','HDVideo': 'Yes'},
+				{'id':27,'rate' : 90000, 'rating':3, 'imgpath': 'images/Photographer/Photographer9.png', 'minBudget' : 1, 'name' :'Bees photos','HDVideo': 'Yes'}
 		       ]
 }
 

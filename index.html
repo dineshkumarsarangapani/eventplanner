@@ -56,7 +56,7 @@ Event Planner
       
     </div>
     </div>
-    <div class="row">
+    <div id="resultsmarriage"  class="row">
     <div class="col-md-2">
     <div class="sideBox">
       <h4>Cash Balance</h4>
@@ -168,7 +168,7 @@ $(document).on("click",'.price',function() {
  });
 
   $("#ajaxform").submit(function(e) {
-
+		$('#resultsmarriage').show()
 	  	//$("#total").text($("#budget").val());	
 	  // get all the inputs into an array.
 	    var $inputs = $('#ajaxform .form-control');
@@ -182,7 +182,7 @@ $(document).on("click",'.price',function() {
 	    
 	    processaccordion(values)
      	console.log(values)
-     	$('.custom_modal').remove()
+     	
      
    });
 
@@ -245,10 +245,10 @@ $(document).on("click",'.price',function() {
 			'<ul class="txt-lft">'+
 				'<li>Name : ' + dd.name + '</li>'+
 				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
-				'<li>Number of Rooms : ' + '12' + '</li>'+
+				'<li>Number of Rooms : ' + dd.Rooms + '</li>'+
 				'<li>Parking : ' + 'Yes' + '</li>'+
 				'<li>A/C Rooms : ' + 'Yes '+ '</li>'+
-				'<li>No of seats : ' + '5000'+ '</li>'+
+				'<li>No of seats : ' + dd.seat + '</li>'+
 			'</ul>'
 			
 			'</div>';
@@ -261,7 +261,7 @@ $(document).on("click",'.price',function() {
 				'<li>Number of items : ' + '12' + '</li>'+
 				'<li>Vegetarian : ' + 'Yes' + '</li>'+
 				'<li>Non-Vegetarian: ' + 'Yes '+ '</li>'+
-				'<li>Buffet : ' + 'Yes'+ '</li>'+
+				'<li>Buffet : ' + dd.buffet + '</li>'+
 			'</ul>'
 			
 			'</div>';
@@ -271,9 +271,9 @@ $(document).on("click",'.price',function() {
 			'<ul class="txt-lft">'+
 				'<li>Name : ' + dd.name + '</li>'+
 				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
-				'<li>Device : ' + '12' + '</li>'+
+				'<li>Device : ' + 'Cannon/Nikon' + '</li>'+
 				'<li>Video : ' + 'Yes' + '</li>'+
-				'<li>HD Video : ' + 'Yes '+ '</li>'+
+				'<li>HD Video : ' + dd.HDVideo+ '</li>'+
 				'<li>Live relay : ' + 'No'+ '</li>'+
 			'</ul>'
 			
@@ -308,7 +308,7 @@ $(document).on("click",'.price',function() {
  ' </span> ' + 
  ' <span class="example-title-lnk"> ' + 
    ' <span class="example-label"> ' + 
-   'Rs. {{rate}}  /  <a data-toggle="modal" data-target="#{{id}}-modal" href="javascript:void(0)">More Details</a>' + 
+   dd.name + ' / Rs. {{rate}}  /  <a data-toggle="modal" data-target="#{{id}}-modal" href="javascript:void(0)">More Details</a>' + 
   '  </span> ' + 
    ' <br> ' +
    ' <label for="{{id}}"> ' + 

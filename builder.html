@@ -38,9 +38,9 @@ Event Planner
        </select>
 	  <div class="form-group">
 	      <label for="fromdate">From</label>
-	    <input name="from" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="fromdate">
+	    <input name="from" type="text" placeholder="07/13/2014" class="form-control form-input date" data-date-format="mm/dd/yy" id="fromdate">
 	    <label for="fromdate">To</label>
-	    <input name="to" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="todate">
+	    <input name="to" type="text" placeholder="08/13/2014" class="form-control form-input date" data-date-format="mm/dd/yy" id="todate">
 	    </div>
 	  <div class="form-group">
 	    <label for="budget">Budget</label>
@@ -56,16 +56,20 @@ Event Planner
       
     </div>
     </div>
+    <div id="resultsmarriage" style="display:none;"  class="row">
+    <div class="col-md-2">
     <div class="sideBox">
       <h4>Cash Balance</h4>
-      <p><label id="total">Rs. 0</label></p>
+      <p><label id="total1">Rs. <span id="total">0</span></label></p>
       <h4>Items Selected</h4>
       <p><label id="items">0</label></p>
       <button class="btn btn-primary" id="checkout" type="button">Checkout</button>
     </div>
-    <div class="container">
+    </div>
+    <div class="col-md-9">
+    <div class="">
     <h1 id="plan"> Give your Budget. We will recommend a plan for you.</h1> 
-<div  id="accordion">
+<div class=""  id="accordion">
 <fieldset class="scheduler-border">
     <legend class="scheduler-border"><h3>Party Hall</h3></legend>
   <div>
@@ -88,7 +92,7 @@ Event Planner
 	    <input name="NonAc" type="checkbox" id="NonAc">
 	  </div>
 	</form>
-	<div id="Marriagehall-content"></div>
+	<div id="Marriagehall-content"> No Preference for now !!!</div>
     </p>
   </div>
   </fieldset>
@@ -112,7 +116,7 @@ Event Planner
 	    <input type="checkbox" id="Buffet">
 	  </div>
 	</form>
-	<div id="Food-content"></div>
+	<div id="Food-content">No Preference for now !!!</div>
     </p>
   </div>
   </fieldset>
@@ -132,19 +136,20 @@ Event Planner
 	    <input name="NonAc" type="checkbox" id="NonAc">
 	    </div>
 	</form>
-	<div id="Photographer-content"></div>
+	<div id="Photographer-content">No Preference for now !!!</div>
    </p>
   </div>
   </fieldset>
 </div>
- 
+</div>
+ </div>
     </div>
 <script type="text/javascript">
 
 $(function() {
 	$('.date').datepicker();
     //$( "#accordion" ).accordion();
-    $( document ).tooltip();
+   // $( document ).tooltip();
     // function to modify the balance cash value
 
 $(document).on("click",'.price',function() {
@@ -158,7 +163,7 @@ $(document).on("click",'.price',function() {
 	}else{
 	  rate = parseInt($(this).attr("rate"));
 	  total = parseInt($("#total").text());
-	  $("#total").text("Rs. "+total+rate);
+	  $("#total").text(+total+rate);
 	}
  });
 
@@ -177,12 +182,17 @@ $(document).on("click",'.price',function() {
 	    
 	    processaccordion(values)
      	console.log(values)
+     	
      
    });
 
-  
+  buildaccord(Datadump)
   function processaccordion(values) {
 	  var budget = values['budget']
+	  if(budget == '') {
+		  buildaccord(Datadump)
+		  return
+	  }
 	  var result = {'Marriagehall': [], 'Food': [], 'Photographer': []}
     $("#total").text($("#budget").val());
 	  $.each(Datadump, function(index, val){
@@ -195,6 +205,96 @@ $(document).on("click",'.price',function() {
 	  buildaccord(result)
   }
   
+  function generatestar(rating) {
+	  var returnt = 
+	  ' <span class="rating">'
+	  for(var i = 1 ; i<= rating; i++) {
+		  returnt +=  '<span class="glyphicon size red glyphicon-star"></span>'
+	  }
+	  for(var i = 1 ; i<= (5-rating); i++) {
+		  returnt +=  '<span class="glyphicon size glyphicon-star"></span>'
+	  }
+	  returnt +=  '</span>' ;
+	  return returnt;
+  }
+  
+  function replaceAll(find, replace, str) {
+	  return str.replace(new RegExp(find, 'g'), replace);
+	}
+  
+  function addmodaldetails(dd, type) {
+	  var modaltemplate = '<div class="modal custom_modal fade" id="{{id}}-modal" tabindex="-1" role="dialog" aria-labelledby="{{id}}-Label" aria-hidden="true">'+
+  '<div class="modal-dialog">'+
+    '<div class="modal-content">'+
+      '<div class="modal-header">'+
+        '<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
+       ' <h4 class="modal-title" id="{{id}}-Label">{{name}}</h4>'+
+    '  </div>'+
+    '  <div class="modal-body">'+
+     '   {{modalbody}}'+
+     ' </div>'+
+     ' <div class="modal-footer">'+
+     '   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+    '  </div>'+
+   ' </div>'+
+  '</div>'+
+'</div>';
+	modaltemplate = replaceAll("{{id}}", dd.id, modaltemplate)
+	var marriagetemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Number of Rooms : ' + dd.Rooms + '</li>'+
+				'<li>Parking : ' + 'Yes' + '</li>'+
+				'<li>A/C Rooms : ' + 'Yes '+ '</li>'+
+				'<li>No of seats : ' + dd.seat + '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
+			var Foodtemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Number of items : ' + '12' + '</li>'+
+				'<li>Vegetarian : ' + 'Yes' + '</li>'+
+				'<li>Non-Vegetarian: ' + 'Yes '+ '</li>'+
+				'<li>Buffet : ' + dd.buffet + '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
+			var Photographertemp = '<div>'+
+	 		'<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="'+dd.imgpath+'" title="'+dd.name+'"> ' + 
+			'<ul class="txt-lft">'+
+				'<li>Name : ' + dd.name + '</li>'+
+				'<li>Price : ' + 'Rs.' + dd.rate + '</li>'+
+				'<li>Device : ' + 'Cannon/Nikon' + '</li>'+
+				'<li>Video : ' + 'Yes' + '</li>'+
+				'<li>HD Video : ' + dd.HDVideo+ '</li>'+
+				'<li>Live relay : ' + 'No'+ '</li>'+
+			'</ul>'
+			
+			'</div>';
+			
+	switch(type) {
+	case 'Marriagehall':
+		modaltemplate = replaceAll("{{modalbody}}", marriagetemp, modaltemplate)
+		break;
+	case 'Food':
+		modaltemplate = replaceAll("{{modalbody}}",Foodtemp, modaltemplate)
+		break;
+	case 'Photographer':
+		modaltemplate = replaceAll("{{modalbody}}", Photographertemp, modaltemplate)
+		break;
+	}
+	
+	return modaltemplate;
+  }
+  
+  
   function buildaccord(result) {
    $.each(result, function(index, data){
 	   var template;
@@ -202,25 +302,28 @@ $(document).on("click",'.price',function() {
 	   $('#' + index +'-content').empty()
 	   $.each(data, function(ind, dd){
 		   console.log(data)
-		   template = '<span class="example-lnk" title="{{name}}"> ' + 
+		   template = '<span class="example-lnk"  title="{{name}}"> ' + 
     '<span class="	 thumbnail"> ' + 
-    '<img width="284" height="186" alt="" src="{{imgpath}}" title=""> ' + 
+    '<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="{{imgpath}}" title=""> ' + 
  ' </span> ' + 
  ' <span class="example-title-lnk"> ' + 
    ' <span class="example-label"> ' + 
-   'Rs. {{rate}} ' + 
+   dd.name + ' / Rs. {{rate}}  /  <a data-toggle="modal" data-target="#{{id}}-modal" href="javascript:void(0)">More Details</a>' + 
   '  </span> ' + 
-   ' <br> ' + 
-   ' <input type="checkbox" class="price" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
+   ' <br> ' +
+   ' <label for="{{id}}"> ' + 
+   ' <input type="checkbox" name="{{name}}}" class="price" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp; Add to Cart' +
+   ' </label> ' +
+ 	generatestar(dd.rating)
   '</span> ' + 
-'</span>'
+'</span>';
+			
+			template += addmodaldetails(dd, index)
 
-			template = template.replace('{{name}}', dd.name)
-			template = template.replace('{{imgpath}}', dd.imgpath)
-			template = template.replace('{{rate}}', dd.rate)
-     		 template = template.replace('{{rate}}', dd.rate)
-			template = template.replace('{{id}}', dd.id)
-			template = template.replace('{{id}}', dd.id)
+			template = replaceAll("{{name}}", dd.name, template)
+			template = replaceAll("{{imgpath}}", dd.imgpath, template)
+     		 template = replaceAll("{{rate}}", dd.rate, template)
+			template = replaceAll("{{id}}", dd.id, template)
 		   $('#' + index +'-content').append(template)
 	   });
 	   
@@ -236,7 +339,11 @@ $(document).on("click",'.price',function() {
 <div class="container">
      	<img alt="We are Hard Working" src="images/coming-soon">
      </div>
+     
 </body>
 
 </html>
+
+
+
     
