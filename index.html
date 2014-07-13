@@ -182,6 +182,7 @@ $(document).on("click",'.price',function() {
 	    
 	    processaccordion(values)
      	console.log(values)
+     	$('.custom_modal').remove()
      
    });
 
@@ -221,6 +222,37 @@ $(document).on("click",'.price',function() {
 	  return str.replace(new RegExp(find, 'g'), replace);
 	}
   
+  function addmodaldetails(dd, type) {
+	  var modaltemplate = '<div class="modal custom_modal fade" id="{{id}}-modal" tabindex="-1" role="dialog" aria-labelledby="{{id}}-Label" aria-hidden="true">'+
+  '<div class="modal-dialog">'+
+    '<div class="modal-content">'+
+      '<div class="modal-header">'+
+        '<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
+       ' <h4 class="modal-title" id="{{id}}-Label">{{name}}</h4>'+
+    '  </div>'+
+    '  <div class="modal-body">'+
+     '   {{modalbody}}'+
+     ' </div>'+
+     ' <div class="modal-footer">'+
+     '   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+    '  </div>'+
+   ' </div>'+
+  '</div>'+
+'</div>';
+	modaltemplate = replaceAll("{{id}}", dd.id, modaltemplate)
+	
+	switch(type) {
+	case 'Marriagehall':
+		break;
+	case 'Food':
+		break;
+	case 'Photographer':
+		break;
+	}
+	
+	return modaltemplate;
+  }
+  
   function buildaccord(result) {
    $.each(result, function(index, data){
 	   var template;
@@ -228,13 +260,13 @@ $(document).on("click",'.price',function() {
 	   $('#' + index +'-content').empty()
 	   $.each(data, function(ind, dd){
 		   console.log(data)
-		   template = '<span class="example-lnk" title="{{name}}"> ' + 
+		   template = '<span class="example-lnk"  title="{{name}}"> ' + 
     '<span class="	 thumbnail"> ' + 
-    '<img width="284" height="186" alt="" src="{{imgpath}}" title=""> ' + 
+    '<img width="284" data-toggle="modal" data-target="#{{id}}-modal" height="186" alt="" src="{{imgpath}}" title=""> ' + 
  ' </span> ' + 
  ' <span class="example-title-lnk"> ' + 
    ' <span class="example-label"> ' + 
-   'Rs. {{rate}} ' + 
+   'Rs. {{rate}}  /  <a data-toggle="modal" data-target="#{{id}}-modal" href="javascript:void(0)">More Details</a>' + 
   '  </span> ' + 
    ' <br> ' +
    ' <label for="{{id}}"> ' + 
@@ -242,7 +274,9 @@ $(document).on("click",'.price',function() {
    ' </label> ' +
  	generatestar(dd.rating)
   '</span> ' + 
-'</span>'
+'</span>';
+			
+			template += addmodaldetails(dd, index)
 
 			template = replaceAll("{{name}}", dd.name, template)
 			template = replaceAll("{{imgpath}}", dd.imgpath, template)
