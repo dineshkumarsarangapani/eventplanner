@@ -1,4 +1,4 @@
-a.example-lnk {
+span.example-lnk {
 	display: inline-block;
 	margin-bottom: 30px;
 	margin-right: 20px;
@@ -77,8 +77,12 @@ legend.scheduler-border {
 .sideBox {
   border: 1px solid;
   float: right;
-  text-align: center;
   width: 200px;
   position: fixed;
   background:white;
+  padding: 20px;
+}
+
+.flt-rht{
+	float:right;
 }

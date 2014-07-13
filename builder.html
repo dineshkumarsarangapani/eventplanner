@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>
-Event Planner - We are Building
+Event Planner
 </title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -9,65 +9,46 @@ Event Planner - We are Building
 <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
 <link href="bootstrap-slider-master/css/bootstrap-slider.css" rel="stylesheet">
     <link href="css_custom/eventplan.css" rel="stylesheet">
-
+<script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="bootstrap-slider-master/js/bootstrap-slider.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
 <div class="container">
 <img class="logo" alt="Event Planner" width ="180px"; src="images/Beatle leaves.png">
-<span class="pull-right"><a>Contact us</a> | <a>Contact us</a> | <a>Contact us</a> | <a>Contact us</a> | <a>Contact us</a></span>
-</div>
-
-<div style="display:none1;" class="navbar  navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">
-          <!-- <img alt="Event Planner" src="images/Beatle leaves.png"> -->
-          </a>
-        </div>
+<span class="pull-right"><a href="builder.html">Contact us</a> | <a href="builder.html">Pricing</a> | 
+<a href="builder.html">FAQ</a> | <a  href="builder.html">Careers</a> | <a  href="builder.html">Vendors</a></span>
+<div class=" ">
          
-        <div class="navbar-collapse collapse">
-          <form class="navbar-form user-from navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
         </div><!--/.navbar-collapse -->
-      </div>
     </div>
-    
     <div class="jumbotron">
       <div class="container">
-       <form onsubmit="return false;" class="form-inline" role="form">
+       <form onsubmit="return false;" name="ajaxform" id="ajaxform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
        <label for="location">Location</label>
-       <select id="location" class="form-control">
+       <select name="location" id="location" class="form-input form-control">
        <option value="">-Location-</option>
-       <option value="">Chennai</option>
-       <option value="">Mumbai</option>
-       <option value="">Kolkata</option>
+       <option value="Chennai">Chennai</option>
+       <option value="Mumbai">Mumbai</option>
+       <option value="Kolkata">Kolkata</option>
        </select>
 	  <div class="form-group">
 	      <label for="fromdate">From</label>
-	    <input type="text" class="form-control date" data-date-format="mm/dd/yy" id="fromdate">
+	    <input name="from" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="fromdate">
 	    <label for="fromdate">To</label>
-	    <input type="text" class="form-control date" data-date-format="mm/dd/yy" id="todate">
+	    <input name="to" type="text" class="form-control form-input date" data-date-format="mm/dd/yy" id="todate">
 	    </div>
 	  <div class="form-group">
 	    <label for="budget">Budget</label>
-	    <input type="text" class="form-control" id="budget" placeholder="in INR">
+	    <input name="budget" type="text" class="form-control" id="budget" placeholder="in INR">
+	  </div>
+	  <div class="form-group">
+	    <label for="noguest">Guest</label>
+	    <input name="noguest" type="text" class="form-control" id="noguest" placeholder="500">
 	  </div>
 	  <button type="submit" class="btn btn-default">Submit</button>
 	</form>
@@ -75,9 +56,187 @@ Event Planner - We are Building
       
     </div>
     </div>
+    <div class="sideBox">
+      <h4>Cash Balance</h4>
+      <p><label id="total">Rs. 0</label></p>
+      <h4>Items Selected</h4>
+      <p><label id="items">0</label></p>
+      <button class="btn btn-primary" id="checkout" type="button">Checkout</button>
+    </div>
+    <div class="container">
+    <h1 id="plan"> Give your Budget. We will recommend a plan for you.</h1> 
+<div  id="accordion">
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Party Hall</h3></legend>
+  <div>
+    <p id="Marriagehall">
+   		<form onsubmit="return false;" name="Marriagehall" id="Marriagehallform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="noseats">No of seats</label>
+       <input name="noseats" type="text" class="form-control form-input" id="noseats">
+	  <div class="form-group">
+	      <label for="norooms">No of rooms</label>
+	    <input name="norooms" type="text" class="form-control form-input" id="norooms">
+	    </div>
+	  <div class="form-group">
+	    <label for="Parking">Parking</label>
+	    <input type="checkbox" id="Parking">
+	  </div>
+	  <div class="form-group">
+	    <label for="ac">A/c</label>
+	    <input name="ac" type="checkbox" id="ac">
+	    <label for="NonAc">NonA/c</label>
+	    <input name="NonAc" type="checkbox" id="NonAc">
+	  </div>
+	</form>
+	<div id="Marriagehall-content"></div>
+    </p>
+  </div>
+  </fieldset>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Food Caterors</h3></legend>
+  <div>
+    <p id="Food">
+    <form onsubmit="return false;" name="food" id="Foodform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="Veg">Veg</label>
+       <input type="checkbox" id="Veg">
+	  <div class="form-group">
+	      <label for="nonveg">Non-Veg</label>
+	    <input type="checkbox" id="nonveg">
+	    </div>
+	  <div class="form-group">
+	    <label for="No-of-Items">No of Items</label>
+	    <input name="No-of-Items" type="text" class="form-control form-input " id="No-of-Items">
+	  </div>
+	  <div class="form-group">
+	    <label for="Buffet">Buffet</label>
+	    <input type="checkbox" id="Buffet">
+	  </div>
+	</form>
+	<div id="Food-content"></div>
+    </p>
+  </div>
+  </fieldset>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border"><h3>Photographers</h3></legend>
+  <div>
+    <p id="Photographer">
+     <form onsubmit="return false;" name="Photographer" id="Photographerform" class="form-inline form-adj" role="form" action="budget.php" method="POST">
+       <label for="Device">Device</label>
+       <input name="NonAc" type="checkbox" id="NonAc">
+	  <div class="form-group">
+	      <label for="Video">Video</label>
+	   <input name="NonAc" type="checkbox" id="NonAc">
+	    </div>
+	    <div class="form-group">
+	      <label for="HD-Video">HD-Video</label>
+	    <input name="NonAc" type="checkbox" id="NonAc">
+	    </div>
+	</form>
+	<div id="Photographer-content"></div>
+   </p>
+  </div>
+  </fieldset>
+</div>
+ 
+    </div>
 <script type="text/javascript">
-$('.date').datepicker()
+
+$(function() {
+	$('.date').datepicker();
+    //$( "#accordion" ).accordion();
+    $( document ).tooltip();
+    // function to modify the balance cash value
+
+$(document).on("click",'.price',function() {
+	var thischeck = $(this);
+	$('#items').text($('.price:checked').length)
+	  var rate,total;
+	  if (thischeck.is (':checked')){
+	  rate = $(this).attr("rate");
+	  total = $("#total").text();
+	  $("#total").text(total-rate);
+	}else{
+	  rate = parseInt($(this).attr("rate"));
+	  total = parseInt($("#total").text());
+	  $("#total").text("Rs. "+total+rate);
+	}
+ });
+
+  $("#ajaxform").submit(function(e) {
+
+	  	//$("#total").text($("#budget").val());	
+	  // get all the inputs into an array.
+	    var $inputs = $('#ajaxform .form-control');
+
+	    // not sure if you wanted this, but I thought I'd add it.
+	    // get an associative array of just the values.
+	    var values = {};
+	    $inputs.each(function() {
+	        values[this.name] = $(this).val();
+	    });
+	    
+	    processaccordion(values)
+     	console.log(values)
+     
+   });
+
+  
+  function processaccordion(values) {
+	  var budget = values['budget']
+	  var result = {'Marriagehall': [], 'Food': [], 'Photographer': []}
+    $("#total").text($("#budget").val());
+	  $.each(Datadump, function(index, val){
+		 $.each(val, function(ind, dataval){
+			if( dataval.rate <= budget) {
+				result[index].push(dataval) 
+			}	 
+		 });
+	  });
+	  buildaccord(result)
+  }
+  
+  function buildaccord(result) {
+   $.each(result, function(index, data){
+	   var template;
+	   console.log($('#' + index +'form'))
+	   $('#' + index +'-content').empty()
+	   $.each(data, function(ind, dd){
+		   console.log(data)
+		   template = '<span class="example-lnk" title="{{name}}"> ' + 
+    '<span class="	 thumbnail"> ' + 
+    '<img width="284" height="186" alt="" src="{{imgpath}}" title=""> ' + 
+ ' </span> ' + 
+ ' <span class="example-title-lnk"> ' + 
+   ' <span class="example-label"> ' + 
+   'Rs. {{rate}} ' + 
+  '  </span> ' + 
+   ' <br> ' + 
+   ' <input type="checkbox" class="price" name={{id}} id="{{id}}" rate="{{rate}}">&nbsp;<img src="img3.jpeg" width="147" height="38"> ' + 
+  '</span> ' + 
+'</span>'
+
+			template = template.replace('{{name}}', dd.name)
+			template = template.replace('{{imgpath}}', dd.imgpath)
+			template = template.replace('{{rate}}', dd.rate)
+     		 template = template.replace('{{rate}}', dd.rate)
+			template = template.replace('{{id}}', dd.id)
+			template = template.replace('{{id}}', dd.id)
+		   $('#' + index +'-content').append(template)
+	   });
+	   
+	   
+   });
+
+//value.replace(".", ":"); // value = 9:61
+  }
+});
+ 
 </script>
+
+<div class="container">
+     	<img alt="We are Hard Working" src="images/coming-soon">
+     </div>
 </body>
 
 </html>
+    
